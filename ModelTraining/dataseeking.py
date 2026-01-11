@@ -20,7 +20,6 @@ n_top_features = 5
 top_features = correlations.nlargest(n_top_features).index
 X_selected = X[top_features]
 print(f"前{n_top_features}的特征有：", top_features.tolist())
-# 由于无论是否增加或减少特征，对于机器学习的得分几乎没有什么变化
 
 # 绘制热力图
 corr_matrix = df.corr()
