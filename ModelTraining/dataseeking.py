@@ -7,7 +7,7 @@ plt.rcParams['font.sans-serif'] = ['PingFang SC', 'Heiti SC', 'Songti SC', 'Aria
 plt.rcParams['axes.unicode_minus'] = False
 
 file_path = os.path.join(os.path.dirname(__file__), "..", "model_data.csv")
-file_path = os.path.abspath(file_path)   # 变成绝对路径，最稳
+file_path = os.path.abspath(file_path)   # 绝对路径
 df = pd.read_csv(file_path)
 
 X = df.drop('总价', axis=1)
@@ -28,7 +28,7 @@ plt.figure(figsize=(10, 10))
 sns.heatmap(corr_matrix, annot=True, fmt=".2f", cmap='coolwarm', square=True, cbar_kws={"shrink": .5})
 plt.title(f'Correlation Heatmap of Features with Target')
 
-# ===== 3) 保存到统一文件夹 outputs/figures =====
+# 保存到统一文件夹 outputs
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 out_dir = os.path.join(project_root, "outputs")
 os.makedirs(out_dir, exist_ok=True)

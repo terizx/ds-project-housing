@@ -8,26 +8,26 @@ from datetime import datetime
 plt.rcParams["font.sans-serif"] = ["PingFang SC", "Heiti SC", "Songti SC", "Arial Unicode MS"]
 plt.rcParams["axes.unicode_minus"] = False
 
-# 读取 results.csv（路径跟脚本同文件夹最稳）
+# 读取 results.csv
 BASE_DIR = os.path.dirname(__file__)
 results_path = os.path.join(BASE_DIR, "results.csv")
 
 df = pd.read_csv(results_path)
 
-# 去掉列名可能存在的空格（很常见）
+# 去掉列名可能存在的空格
 df.columns = [c.strip() for c in df.columns]
 
-# 只保留你要展示的三列
+# 只保留要展示的三列
 model_col = "Model"
 rmse_col = "Test RMSE"
 r2_train_col = "Train Score"
 r2_test_col = "Test Score"
 
-# 如果你只想画“你最终选的3个模型”，可以在这里手动指定筛选（可选）
+
 # keep_models = ["Linear Regression", "Decision Tree", "Random Forest"]
 # df = df[df[model_col].isin(keep_models)]
 
-# 排序：按 RMSE 从小到大更直观（也可按 Test Score 从大到小）
+# 排序：按 RMSE 从小到大更直观
 df = df.sort_values(by=rmse_col, ascending=True)
 
 models = df[model_col].tolist()
