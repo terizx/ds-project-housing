@@ -1,12 +1,15 @@
-import pandas as np
+import numpy as np
 import pandas as pd
+import os
 import seaborn as sns
 import matplotlib.pyplot as plt
-plt.rcParams['font.sans-serif']=['SimHei'] #用来正常显示中文标签
-plt.rcParams['axes.unicode_minus']=False #用来正常显示负号
+plt.rcParams['font.sans-serif'] = ['PingFang SC', 'Heiti SC', 'Songti SC', 'Arial Unicode MS']
+plt.rcParams['axes.unicode_minus'] = False
 
-file_path = r'./模型数据.csv'
+file_path = os.path.join(os.path.dirname(__file__), "..", "model_data.csv")
+file_path = os.path.abspath(file_path)   # 变成绝对路径，最稳
 df = pd.read_csv(file_path)
+
 X = df.drop('总价', axis=1)
 y = df['总价']
 # 计算所有特征和总价的相关性
@@ -24,4 +27,15 @@ corr_matrix = df.corr()
 plt.figure(figsize=(10, 10))
 sns.heatmap(corr_matrix, annot=True, fmt=".2f", cmap='coolwarm', square=True, cbar_kws={"shrink": .5})
 plt.title(f'Correlation Heatmap of Features with Target')
+
+# ===== 3) 保存到统一文件夹 outputs/figures =====
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+out_dir = os.path.join(project_root, "outputs")
+os.makedirs(out_dir, exist_ok=True)
+
+out_path = os.path.join(out_dir, "heatmap.png")
+plt.savefig(out_path, dpi=300, bbox_inches="tight")
+
+print("✅ Heatmap saved to:", out_path)
+
 plt.show()
