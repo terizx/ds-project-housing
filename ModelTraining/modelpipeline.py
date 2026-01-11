@@ -29,8 +29,10 @@ fh.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(filename)s:%(
 # 添加文件日志处理器到logger
 logger.addHandler(fh)
 
-# 构建模型流水线（
-data_path = './model_data.csv'
+# 构建模型流水线
+base_dir = os.path.dirname(__file__)
+data_path = os.path.join(base_dir, '..', 'model_data.csv')
+data_path = os.path.abspath(data_path)
 data = pd.read_csv(data_path)
 
 # 特征和标签
