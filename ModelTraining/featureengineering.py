@@ -3,8 +3,7 @@ import numpy as np
 import pandas as pd
 import re
 
-data_path = r'D:\pycharm\pycharm_projects\Machine-Learning-Work\DataPreprocessing\广州链家二手房数据(三大项处理后).csv'
-data = pd.read_csv(data_path)
+data = pd.read_csv("DataPreprocessing/广州链家二手房数据(三大项处理后).csv")
 
 house_columns = ['标题', '小区', '地区', '总价', '单价', '所在区', '房屋户型', '建筑面积', '房屋朝向', '装修情况', '所在楼层', '建房时间', '建筑类型']
 
@@ -99,4 +98,5 @@ jianzhu_code = {
 }
 df['建筑类型'] = df['建筑类型'].map(jianzhu_code)
 
-df.to_csv('./模型数据.csv', index=False)
+df.to_csv("model_data.csv", index=False)  
+
